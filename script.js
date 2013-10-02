@@ -9,9 +9,9 @@ var ToDo = Backbone.Model.extend({
 
 var ToDoView = Backbone.View.extend({
 	el: '.todos-list',
-	tagName: "li",
-	className: "todo",
-	template: _.template($("#todo-template").html()),
+	tagName: 'li',
+	className: '.todos-list li',
+	template: _.template($('#todo-template').html()),
 	render: function(){
 		this.$el.append(this.template(this.model.toJSON()));
 	}
@@ -25,8 +25,9 @@ $("#new-todo").keyup(function(e){
 				completed: false
 			})
 		})
+		addTask.render();
+		$(this).val("");
 	}
-	addTask.render();
 });
 
 
