@@ -75,6 +75,7 @@ h1 {
 	font-size: 24px;
 	border-top: 1px dotted #fff;
 	padding-left: 14px;
+	display: inline-block;
 }
 
 .todos-list li label {
