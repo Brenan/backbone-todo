@@ -3,7 +3,14 @@ $(document).ready(function() {
 var ToDo = Backbone.Model.extend({
 	defaults:{
 		title: '',
-		completed: true
+		completed: false,
+		toggle: function(){
+			if ($("input checked")){
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 });
 
@@ -21,7 +28,7 @@ $("#new-todo").keyup(function(e){
 		var addTask = new ToDoView({
 			model: new ToDo({
 				title: $(this).val(),
-				completed: false
+				completed: $(this).toggle()
 			})
 		})
 		addTask.render();
