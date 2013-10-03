@@ -3,17 +3,16 @@ $(document).ready(function() {
 var ToDo = Backbone.Model.extend({
 	defaults:{
 		title: '',
-		completed: false
+		completed: true
 	}
 });
 
 var ToDoView = Backbone.View.extend({
-	el: '.todos-list',
 	tagName: 'li',
-	className: '.todos-list li',
 	template: _.template($('#todo-template').html()),
 	render: function(){
-		this.$el.append(this.template(this.model.toJSON()));
+		var newEl =	this.$el.append(this.template(this.model.toJSON()));
+		$(".todos-list").append(newEl);	
 	}
 });
 
