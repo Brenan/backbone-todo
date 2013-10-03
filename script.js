@@ -5,7 +5,7 @@ var ToDo = Backbone.Model.extend({
 		title: '',
 		completed: false,
 		toggle: function(){
-			if ($("input checked")){
+			if ($("label.checked")){
 				return true;
 			} else {
 				return false;
