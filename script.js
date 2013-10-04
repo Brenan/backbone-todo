@@ -4,23 +4,31 @@ var ToDo = Backbone.Model.extend({
 	defaults:{
 		title: '',
 		completed: false,
+		},
 		toggle: function(){
-			if ($("label.checked")){
-				return true;
-			} else {
-				return false;
+			this.set({completed: !this.get('completed')});
 			}
-		}
-	}
 });
 
 var ToDoView = Backbone.View.extend({
+	initialize: function(){
+		this.listenTo(this.model, 'change', this.render);
+		$('.todos-list').append(this.el);
+		this.render();
+
+	},
 	tagName: 'li',
 	template: _.template($('#todo-template').html()),
 	render: function(){
-		var newEl =	this.$el.append(this.template(this.model.toJSON()));
-		$(".todos-list").append(newEl);	
+		var newEl =	this.$el.html(this.template(this.model.toJSON()));
+		// $(".todos-list").append(newEl);	
+		
+	},
+	
+	events:{
+		'click .toggle': function(){this.model.toggle();}
 	}
+	
 });
 
 $("#new-todo").keyup(function(e){
@@ -28,7 +36,7 @@ $("#new-todo").keyup(function(e){
 		var addTask = new ToDoView({
 			model: new ToDo({
 				title: $(this).val(),
-				completed: $(this).toggle()
+				completed: false
 			})
 		})
 		addTask.render();
